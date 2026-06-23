@@ -164,6 +164,70 @@
     font-size: 14px;
     color: #166534;
   }
+  .pivot-v1 {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid #86EFAC;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #14532D;
+  }
+  .pivot-v1 .v1-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #15803D;
+    margin-bottom: 6px;
+  }
+  .pivot-divider {
+    border: none;
+    border-top: 1px dashed #86EFAC;
+    margin: 20px 0;
+  }
+  .hurdle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .hurdle-item {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .hurdle-item .hurdle-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #B91C1C;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .hurdle-item h5 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7F1D1D;
+    margin-bottom: 6px;
+  }
+  .hurdle-item p {
+    font-size: 12px;
+    color: #9F1239;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .pivot-conclusion {
+    background: #1E3A2F;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: #A7F3D0;
+    line-height: 1.7;
+  }
+  .pivot-conclusion strong { color: #6EE7B7; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 20px 0; }
   .card {
@@ -455,30 +519,66 @@
   <!-- 0. 전략 피벗 배경 -->
   <div class="pivot-box" id="pivot">
     <div class="pivot-title">Strategy Pivot — v2.1 변경 배경</div>
-    <h3>왜 "CSV 업로드"에서 "디지털 스탬프 카드"로 바꿨는가</h3>
+    <h3>v1에서 출발해 왜 지금의 방향으로 왔는가</h3>
 
+    <!-- v1 서비스 요약 -->
+    <div class="pivot-v1">
+      <div class="v1-label">v1 서비스 개요 — 이 문서를 처음 보는 분을 위한 배경</div>
+      <p>리봇 v1은 <strong>"카페·베이커리 사장님을 위한 AI 단골 재방문 메시지 엔진"</strong>이었다. 핵심 흐름은 단순했다: 사장님이 보유한 고객 데이터(연락처 + 방문이력)를 CSV로 업로드하면, AI가 이탈 위험 고객을 자동으로 감지하고 "사장님이 직접 쓴 것 같은" 개인화 메시지 초안을 생성해준다. 광고성 일괄 문자 대신, 고객 한 명 한 명에게 맞춘 메시지로 재방문을 유도하는 것이 핵심 가치 제안이었다.</p>
+    </div>
+
+    <hr class="pivot-divider">
+
+    <!-- 문제 발견: v1 → 현실의 갭 -->
+    <p style="font-size:14px; color:#166534; font-weight:600; margin-bottom:10px;">v1이 부딪힌 현실: "데이터가 없다"</p>
     <p style="font-size:14px; color:#166534; margin-bottom:16px;">
-      v2까지 리봇의 주요 데이터 수집 방법은 ① 사장님이 엑셀로 정리한 고객 목록을 CSV로 업로드하거나, ② 카운터에서 QR을 찍어 고객이 번호를 입력하게 하는 방식이었다. 그런데 실제 현장을 검토하면 두 방법 모두 결정적인 약점이 있다.
+      v1의 치명적 전제는 <em>"사장님이 이미 고객 데이터를 갖고 있다"</em>는 것이었다. 그러나 실제 카페·베이커리 현장을 검토하면, 고객 연락처를 체계적으로 관리하는 소규모 매장은 극히 드물다. 설령 있더라도 이미 다른 CRM 도구를 쓰고 있을 가능성이 높다. v1은 서비스의 핵심 기능(AI 메시지)보다 앞서 해결해야 할 더 근본적인 문제, <strong>데이터 수집 접점 자체가 없다</strong>는 허들에 막혔다.
     </p>
 
     <div class="pivot-compare">
       <div class="pivot-before">
-        <div class="pivot-label before">기존 방식의 문제</div>
-        <p><strong>CSV 업로드:</strong> 카페·베이커리 사장님이 고객 정보를 엑셀로 정리해두는 경우는 극히 드물다. 정리할 만큼 체계적이라면 이미 다른 도구를 쓰고 있을 가능성이 높다.</p>
+        <div class="pivot-label before">기존 방식의 문제 (v1 → v2)</div>
+        <p><strong>CSV 업로드:</strong> 사장님이 고객 정보를 엑셀로 정리해두는 경우는 극히 드물다. 정리할 만큼 체계적이라면 이미 도도포인트나 다른 도구를 쓰고 있다.</p>
         <br>
-        <p><strong>QR 번호 입력:</strong> "픽업 알림"은 매력적이지만, 2~3분 기다리면 나오는 커피 한 잔을 위해 번호를 입력할 고객은 많지 않다. 수집 동기가 약하다.</p>
+        <p><strong>QR 번호 입력(픽업 알림):</strong> 2~3분 기다리면 나오는 커피 한 잔을 위해 번호를 입력할 고객은 많지 않다. 고객이 정보를 남길 <em>동기</em>가 없다.</p>
       </div>
       <div class="pivot-arrow">→</div>
       <div class="pivot-after">
-        <div class="pivot-label after">새로운 방향</div>
-        <p><strong>디지털 스탬프 카드:</strong> 한국 카페 고객은 이미 "10잔 마시면 1잔 무료" 쿠폰에 익숙하다. 종이 쿠폰을 QR 스캔으로 대체하면, 고객이 <em>자발적으로</em> 정보를 남긴다. 데이터 수집이 부산물이 된다.</p>
+        <div class="pivot-label after">새로운 진입점 (v2.1)</div>
+        <p><strong>디지털 스탬프 카드:</strong> 한국 카페 고객은 이미 "10잔 마시면 1잔 무료" 종이 쿠폰에 익숙하다. 이것을 QR 스캔 + 카카오채널로 대체하면, 고객이 <em>자발적으로</em> 정보를 남긴다. 스탬프를 받으려는 동기가 데이터 수집의 엔진이 된다.</p>
         <br>
-        <p><strong>핵심 전환:</strong> 리봇의 진입점을 "AI 메시지 서비스"에서 "종이 쿠폰 대체 디지털 스탬프"로 바꾸고, AI 재방문 메시지는 그 위에 올리는 구조.</p>
+        <p><strong>핵심 전환:</strong> 진입점을 "AI 메시지 서비스"에서 "종이 쿠폰 대체 디지털 스탬프"로 바꾸고, AI 재방문 메시지는 그 위에 올리는 2층 구조.</p>
       </div>
     </div>
 
-    <div class="pivot-reason">
-      <strong>결론:</strong> 데이터 수집은 고객에게 즉각적인 가치(스탬프 적립)가 있을 때만 자연스럽게 작동한다. 리봇은 사장님에게는 "하드웨어 없는 도도포인트", 고객에게는 "앱 없는 디지털 스탬프 카드"로 포지셔닝한다. AI 메시지는 그 데이터 위에서 작동하는 핵심 차별화 레이어다.
+    <hr class="pivot-divider">
+
+    <!-- 새 방향의 허들 -->
+    <p style="font-size:14px; color:#166534; font-weight:600; margin-bottom:10px;">그러나 새 방향에도 강력한 허들이 있다</p>
+    <p style="font-size:13px; color:#166534; margin-bottom:12px;">
+      디지털 스탬프 카드로의 피벗이 문제를 완전히 해결하지는 않는다. 이 방향에서 반드시 넘어야 할 세 가지 벽이 있다.
+    </p>
+
+    <div class="hurdle-grid">
+      <div class="hurdle-item">
+        <div class="hurdle-num">허들 1</div>
+        <h5>강력한 직접 경쟁자 이미 존재</h5>
+        <p>도도포인트는 이미 수만 매장에 침투해 있고, 플러터 등 QR 기반 디지털 스탬프 서비스도 존재한다. 사장님 입장에서는 "왜 리봇이어야 하나?"라는 질문에 명확히 답해야 한다. 스탬프 카드 기능만으로는 차별화가 되지 않는다.</p>
+      </div>
+      <div class="hurdle-item">
+        <div class="hurdle-num">허들 2</div>
+        <h5>경쟁 우위 선점의 시간 압박</h5>
+        <p>스탬프 카드는 쉽게 복사된다. 토스플레이스·캐시노트 같은 대형 플레이어가 AI 메시지 기능을 추가하는 순간 리봇의 차별화가 무력화된다. 빠르게 "AI 메시지가 재방문율을 X% 높인다"는 수치 증거를 확보하지 못하면, 진입 기회 자체가 닫힌다.</p>
+      </div>
+      <div class="hurdle-item">
+        <div class="hurdle-num">허들 3</div>
+        <h5>고객 데이터 수집의 실제 어려움</h5>
+        <p>스탬프를 위해 채널을 추가해도 <em>마케팅 동의</em>를 하지 않으면 재방문 메시지 발송 자체가 불법이다. 동의율이 낮으면 DB는 쌓이지만 정작 쓸 수 있는 고객이 적다. 또한 카카오채널에 전적으로 의존하는 구조는 카카오 정책 변경 시 서비스 전체가 흔들리는 리스크를 안는다.</p>
+      </div>
+    </div>
+
+    <div class="pivot-conclusion">
+      <strong>결론 — 무엇을 증명해야 하는가:</strong> 리봇은 베타 단계에서 두 가지를 반드시 수치로 증명해야 한다. ① 디지털 스탬프 카드의 마케팅 동의 전환율이 충분히 높은가 (목표 40% 이상), ② AI 메시지가 일반 문자 대비 재방문율을 유의미하게 높이는가 (목표 +20%p). 이 두 수치가 없으면 경쟁사 대비 설득력 있는 포지셔닝이 불가능하다. 반대로 이 수치가 있으면, 도도포인트를 포함한 기존 플레이어에 화이트라벨 제안까지 가능해진다.
     </div>
   </div>
 
