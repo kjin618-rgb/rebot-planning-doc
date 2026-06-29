@@ -141,6 +141,7 @@
       border-radius: 100px;
     }
     .tag-mvp { background: var(--amber-light); color: var(--amber-dark); }
+    .tag-dev { background: #fef9c3; color: #854d0e; }
     .tag-phase2 { background: var(--blue-light); color: var(--blue); }
     .tag-future { background: var(--stone-light); color: var(--stone); }
     .tag-done { background: var(--green-light); color: var(--green); }
@@ -923,20 +924,34 @@
 <div class="section">
   <div class="container">
     <div class="section-label">04 Feature Scope</div>
-    <h2 class="section-title">기능 범위 — MVP vs Phase 2</h2>
+    <h2 class="section-title">기능 범위</h2>
 
     <p class="section-desc">
-      초록은 MVP에서 구현하거나 구현 완료, 파란색은 Phase 2 이후 추가할 기능입니다.
+      고객향·사장님향 각 GitHub 레포 코드 기준으로 구현 상태를 업데이트했습니다 (2026-06-29 기준).
+      고객이 스탬프 페이지에서 입력한 데이터는 Supabase를 통해 사장님 대시보드에 실시간 연동됩니다.
     </p>
 
+    <!-- 범례 -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;align-items:center;">
+      <span style="font-size:12px;color:#78716c;font-weight:600;">구분:</span>
+      <span class="tag tag-done">✓ 완료</span>
+      <span class="tag tag-dev">개발중</span>
+      <span class="tag tag-phase2">Phase 2</span>
+    </div>
+
+    <!-- 고객용 -->
     <div style="margin-bottom:32px;">
-      <div class="card-title" style="margin-bottom:12px;font-size:16px;">고객용 (스탬프 적립 화면)</div>
+      <div class="card-title" style="margin-bottom:4px;font-size:16px;">고객용 (스탬프 적립 화면)</div>
+      <p style="font-size:12px;color:#78716c;margin-bottom:12px;">
+        배포: <a href="https://rebot-app-customer-facing-page.vercel.app/" target="_blank" style="color:var(--green);">rebot-app-customer-facing-page.vercel.app</a>
+        <span style="margin-left:8px;padding:2px 8px;background:#fef2f2;color:#dc2626;border-radius:4px;font-size:11px;font-weight:600;">⚠ Vercel 배포 오류 수정 예정</span>
+      </p>
       <div style="background:white;border:1px solid #e7e5e4;border-radius:10px;overflow:hidden;">
         <table>
           <thead>
             <tr>
-              <th style="width:40%;">기능</th>
-              <th style="width:20%;">구분</th>
+              <th style="width:38%;">기능</th>
+              <th style="width:18%;">구분</th>
               <th>설명</th>
             </tr>
           </thead>
@@ -944,27 +959,37 @@
             <tr>
               <td>전화번호 입력 스탬프 적립</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>SMS 인증 없음, 서버 즉시 처리</td>
+              <td>SMS 인증 없음, Express → Supabase <code>customers</code> / <code>visit_logs</code> 저장</td>
             </tr>
             <tr>
               <td>localStorage 재방문 인식</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>재방문 시 이전 정보 자동 불러오기, 전화번호 마스킹 표시</td>
+              <td>재방문 시 전화번호 자동 불러오기, 마스킹 표시</td>
             </tr>
             <tr>
               <td>마케팅 동의 수집</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>첫 방문 시만 표시, 재방문 시 숨김</td>
+              <td>신규 고객 첫 방문 시만 표시, <code>marketing_consent_at</code> 타임스탬프 저장</td>
             </tr>
             <tr>
               <td>적립 상태 피드백</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>success / duplicate / error 3가지 상태</td>
+              <td><code>stampEarned</code> / <code>alreadyStampedToday</code> / error 3가지 상태</td>
             </tr>
             <tr>
               <td>리워드 안내</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>목표 스탬프 도달 시 store.reward_desc 텍스트 표시</td>
+              <td>목표 스탬프 도달 시 <code>store.reward_desc</code> 표시, 스탬프 리셋</td>
+            </tr>
+            <tr>
+              <td>Supabase 사장님 대시보드 연동</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>고객이 적립 시 <code>customers</code>·<code>visit_logs</code> 테이블에 저장 → 사장님 대시보드 실시간 반영</td>
+            </tr>
+            <tr style="background:#fef9c3;">
+              <td><strong>당일 복수 스탬프 적립</strong></td>
+              <td><span class="tag tag-dev">개발중</span></td>
+              <td>현재 하루 1잔 제한 → 여러 잔 주문·당일 재방문 시 추가 적립 가능하도록 개선 예정</td>
             </tr>
             <tr>
               <td>고객 앱 / 포인트 조회</td>
@@ -981,61 +1006,67 @@
       </div>
     </div>
 
+    <!-- 사장님 대시보드 -->
     <div style="margin-bottom:32px;">
-      <div class="card-title" style="margin-bottom:12px;font-size:16px;">사장님용 — 대시보드</div>
+      <div class="card-title" style="margin-bottom:4px;font-size:16px;">사장님용 — 대시보드</div>
+      <p style="font-size:12px;color:#78716c;margin-bottom:12px;">
+        배포: <a href="https://rebot-app-owner-dashboard.vercel.app/dashboard/demo" target="_blank" style="color:var(--blue);">rebot-app-owner-dashboard.vercel.app/dashboard/demo</a>
+        &nbsp;·&nbsp; Supabase 연동 완료
+      </p>
       <div style="background:white;border:1px solid #e7e5e4;border-radius:10px;overflow:hidden;">
         <table>
           <thead>
             <tr>
-              <th style="width:40%;">기능</th>
-              <th style="width:20%;">구분</th>
+              <th style="width:38%;">기능</th>
+              <th style="width:18%;">구분</th>
               <th>설명</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>핵심 지표 요약 카드</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>전체 고객, 오늘 적립, 마케팅 동의, 이탈 위험, 최근 30일 재방문, 발송 대기</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>전체 고객, 오늘 적립, 마케팅 동의, 이탈 위험, 최근 30일 재방문, 발송 대기 — <code>GET /api/dashboard</code></td>
             </tr>
             <tr>
               <td>이탈 현황 4단계 표시</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>정상 / 관심 필요 / 이탈 위험 / 장기 미방문</td>
+              <td>safe / watch / danger / churned — <code>churn_summary</code> 실시간 계산</td>
             </tr>
             <tr>
               <td>빠른 작업 버튼</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
               <td>이탈 고객 보기, 메시지 생성, 콘텐츠 생성, QR 확인</td>
             </tr>
             <tr>
               <td>최근 활동 피드</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>스탬프 적립, 신규 등록, 초안 생성, 발송 이력</td>
-            </tr>
-            <tr>
-              <td>성과 지표</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>재방문율, 전환율 — 데이터 부족 시 "측정 중" 표시</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>신규 고객 등록, 초안 생성, 발송 이력 최신 6건</td>
             </tr>
             <tr>
               <td>사이드바 + 모바일 하단 탭</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
               <td>데스크톱 사이드바 / 모바일 하단 탭 반응형 레이아웃</td>
+            </tr>
+            <tr>
+              <td>성과 지표</td>
+              <td><span class="tag tag-dev">개발중</span></td>
+              <td>재방문율·전환율 — UI는 완료, 현재 임시 수치 표시 (실제 DB 계산 연결 예정)</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
+    <!-- 고객 관리 -->
     <div style="margin-bottom:32px;">
       <div class="card-title" style="margin-bottom:12px;font-size:16px;">사장님용 — 고객 관리</div>
       <div style="background:white;border:1px solid #e7e5e4;border-radius:10px;overflow:hidden;">
         <table>
           <thead>
             <tr>
-              <th style="width:40%;">기능</th>
-              <th style="width:20%;">구분</th>
+              <th style="width:38%;">기능</th>
+              <th style="width:18%;">구분</th>
               <th>설명</th>
             </tr>
           </thead>
@@ -1043,31 +1074,31 @@
             <tr>
               <td>고객 목록 + 이탈 단계 필터</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>전체 / 주의 / 위험 / 이탈 필터링</td>
+              <td>전체 / 주의 / 위험 / 이탈 필터 — Supabase 실시간 조회</td>
             </tr>
             <tr>
               <td>전화번호 마스킹</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>010****5678 형태로 표시</td>
+              <td>010-****-5678 형태, DB 저장 시점에 <code>phone_masked</code> 컬럼 생성</td>
             </tr>
             <tr>
               <td>고객 상세 페이지</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>방문 통계, 스탬프, 방문 이력 타임라인, 메시지 이력</td>
+              <td>방문 통계, 스탬프 현황, 방문 이력 타임라인, 메시지 이력</td>
             </tr>
             <tr>
               <td>이름·전화번호 검색</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
+              <td><span class="tag tag-dev">개발중</span></td>
               <td>클라이언트 사이드 필터링</td>
             </tr>
             <tr>
-              <td>마케팅 동의 필터</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>미동의 고객은 발송 버튼 비활성화</td>
+              <td>마케팅 동의 필터 / 발송 버튼 비활성화</td>
+              <td><span class="tag tag-dev">개발중</span></td>
+              <td>미동의 고객 메시지 발송 차단 UI</td>
             </tr>
             <tr>
               <td>방문 횟수·최근 방문일 정렬</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
+              <td><span class="tag tag-dev">개발중</span></td>
               <td>컬럼 정렬</td>
             </tr>
             <tr>
@@ -1080,14 +1111,15 @@
       </div>
     </div>
 
+    <!-- AI 메시지 -->
     <div style="margin-bottom:32px;">
       <div class="card-title" style="margin-bottom:12px;font-size:16px;">사장님용 — AI 메시지</div>
       <div style="background:white;border:1px solid #e7e5e4;border-radius:10px;overflow:hidden;">
         <table>
           <thead>
             <tr>
-              <th style="width:40%;">기능</th>
-              <th style="width:20%;">구분</th>
+              <th style="width:38%;">기능</th>
+              <th style="width:18%;">구분</th>
               <th>설명</th>
             </tr>
           </thead>
@@ -1095,26 +1127,31 @@
             <tr>
               <td>AI 재방문 메시지 초안 생성</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>OpenRouter API (Gemini Flash 1.5 8B) 사용, 존댓말·사장님 톤</td>
-            </tr>
-            <tr>
-              <td>메시지 편집 + 글자 수 표시</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>inline 편집, 실시간 카운트</td>
+              <td>OpenRouter (Gemini Flash 1.5 8B), 이탈 단계·선호 메뉴·리워드 반영, Supabase <code>messages</code> 저장</td>
             </tr>
             <tr>
               <td>다시 생성 / 복사 / 발송 처리</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>PATCH /api/messages/[id] 로 status='sent' 처리</td>
+              <td><code>PATCH /api/messages/:id</code> → <code>status='sent'</code>, <code>sent_at</code> 기록</td>
             </tr>
             <tr>
               <td>30일 내 재발송 경고</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>경고 배너 표시 (강제 차단 아님)</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td><code>last_sent_within_30d</code> 필드로 경고 표시 (강제 차단 아님)</td>
+            </tr>
+            <tr>
+              <td>메시지 삭제</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td><code>DELETE /api/messages/:id</code></td>
+            </tr>
+            <tr>
+              <td>메시지 편집 + 글자 수 표시</td>
+              <td><span class="tag tag-dev">개발중</span></td>
+              <td>inline 편집, 실시간 카운트</td>
             </tr>
             <tr>
               <td>마케팅 미동의 발송 비활성화</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
+              <td><span class="tag tag-dev">개발중</span></td>
               <td>발송 버튼 disabled + 안내 문구</td>
             </tr>
             <tr>
@@ -1132,14 +1169,15 @@
       </div>
     </div>
 
+    <!-- SNS / 설정 -->
     <div style="margin-bottom:32px;">
       <div class="card-title" style="margin-bottom:12px;font-size:16px;">사장님용 — SNS 콘텐츠 / 설정</div>
       <div style="background:white;border:1px solid #e7e5e4;border-radius:10px;overflow:hidden;">
         <table>
           <thead>
             <tr>
-              <th style="width:40%;">기능</th>
-              <th style="width:20%;">구분</th>
+              <th style="width:38%;">기능</th>
+              <th style="width:18%;">구분</th>
               <th>설명</th>
             </tr>
           </thead>
@@ -1147,42 +1185,42 @@
             <tr>
               <td>AI SNS 콘텐츠 초안 생성</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>인스타그램 / 네이버 플레이스 / 카카오채널 채널별 생성</td>
-            </tr>
-            <tr>
-              <td>콘텐츠 입력 폼</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>홍보 목적, 이벤트 내용, 혜택, 기간, 말투, 강조 포인트</td>
+              <td>인스타그램·네이버·카카오채널 채널별 생성 — <code>POST /api/generate-post</code></td>
             </tr>
             <tr>
               <td>해시태그 자동 제안</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>인스타그램 전용</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>AI 프롬프트에서 인스타그램 전용 해시태그 포함 생성</td>
             </tr>
             <tr>
-              <td>초안 임시 저장 목록</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>mock 저장 → Phase 2에 DB 연결</td>
+              <td>초안 저장 목록</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>Supabase <code>content_drafts</code> 테이블 저장 (<code>GET/POST /api/content</code>)</td>
+            </tr>
+            <tr>
+              <td>매장 설정 (이름, 스탬프 목표, 서명)</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td><code>GET/PATCH /api/settings</code> → Supabase <code>stores</code> 업데이트</td>
+            </tr>
+            <tr>
+              <td>콘텐츠 입력 폼</td>
+              <td><span class="tag tag-dev">개발중</span></td>
+              <td>홍보 목적, 이벤트 내용, 혜택, 기간, 말투, 강조 포인트 입력 UI</td>
+            </tr>
+            <tr>
+              <td>QR 코드 생성·다운로드</td>
+              <td><span class="tag tag-dev">개발중</span></td>
+              <td>설정 페이지 <code>QRPreview</code> 컴포넌트, 이미지 저장 기능</td>
+            </tr>
+            <tr>
+              <td>매장 로고·브랜드 색상</td>
+              <td><span class="tag tag-dev">개발중</span></td>
+              <td>UI 구성 완료, 실제 이미지 업로드는 Phase 2</td>
             </tr>
             <tr>
               <td>SNS 직접 게시</td>
               <td><span class="tag tag-phase2">Phase 2</span></td>
               <td>각 플랫폼 API 연동</td>
-            </tr>
-            <tr>
-              <td>매장 설정 (이름, 스탬프 목표, 서명)</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>stores 테이블 업데이트</td>
-            </tr>
-            <tr>
-              <td>QR 코드 생성·다운로드</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>설정 페이지에서 QR 미리보기 + 이미지 저장</td>
-            </tr>
-            <tr>
-              <td>매장 로고·브랜드 색상</td>
-              <td><span class="tag tag-mvp">MVP</span></td>
-              <td>UI만 구현, 실제 업로드는 Phase 2</td>
             </tr>
             <tr>
               <td>사장님 로그인·인증</td>
