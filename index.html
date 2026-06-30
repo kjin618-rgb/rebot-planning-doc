@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>리봇(Rebot) — 서비스 기획서 v3</title>
+  <title>리봇(Rebot) — 서비스 기획서 v3.1</title>
   <style>
     :root {
       --amber: #d97706;
@@ -401,7 +401,7 @@
     <div class="meta-grid">
       <div class="meta-item">
         <div class="label">문서 버전</div>
-        <div class="value">v3 — 2026-06-29</div>
+        <div class="value">v3.1 — 2026-06-30</div>
       </div>
       <div class="meta-item">
         <div class="label">작성자</div>
@@ -409,7 +409,7 @@
       </div>
       <div class="meta-item">
         <div class="label">현재 단계</div>
-        <div class="value">MVP 배포 완료 (데이터 연동 예정)</div>
+        <div class="value">MVP 배포 완료 (Supabase 데이터 연동 정상)</div>
       </div>
       <div class="meta-item">
         <div class="label">랜딩페이지</div>
@@ -421,7 +421,7 @@
       </div>
       <div class="meta-item">
         <div class="label">배포 — 사장님용</div>
-        <div class="value"><a href="https://rebot-app-owner-dashboard.vercel.app/dashboard/demo" target="_blank" style="color:#fbbf24;text-decoration:none;">owner-dashboard ↗</a></div>
+        <div class="value"><a href="https://rebot-app-owner-dashboard.vercel.app/dashboard/cafe-rebot" target="_blank" style="color:#fbbf24;text-decoration:none;">owner-dashboard ↗</a></div>
       </div>
       <div class="meta-item">
         <div class="label">GitHub — 고객용</div>
@@ -449,11 +449,11 @@
        style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#1c1917;background:white;border:1px solid #059669;border-radius:6px;padding:5px 14px;text-decoration:none;">
       📱 고객 스탬프 페이지
     </a>
-    <a href="https://rebot-app-owner-dashboard.vercel.app/dashboard/demo" target="_blank"
+    <a href="https://rebot-app-owner-dashboard.vercel.app/dashboard/cafe-rebot" target="_blank"
        style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#1c1917;background:white;border:1px solid #2563eb;border-radius:6px;padding:5px 14px;text-decoration:none;">
-      💼 사장님 대시보드 (demo)
+      💼 사장님 대시보드 (cafe-rebot)
     </a>
-    <span style="font-size:12px;color:#92400e;margin-left:auto;">※ 사장님 대시보드 Supabase 연동 작업 중</span>
+    <span style="font-size:12px;color:#065f46;margin-left:auto;">※ 고객용·사장님용 모두 Supabase 연동 정상</span>
   </div>
 </div>
 
@@ -929,8 +929,8 @@
     <h2 class="section-title">기능 범위</h2>
 
     <p class="section-desc">
-      고객향·사장님향 각 GitHub 레포 코드 기준으로 구현 상태를 업데이트했습니다 (2026-06-29 기준).
-      고객이 스탬프 페이지에서 입력한 데이터는 Supabase를 통해 사장님 대시보드에 실시간 연동됩니다.
+      고객향·사장님향 각 GitHub 레포 코드 기준으로 구현 상태를 업데이트했습니다 (2026-06-30 기준).
+      고객이 스탬프 페이지에서 입력한 데이터는 Supabase를 통해 사장님 대시보드에 매장별로 연동됩니다.
     </p>
 
     <!-- 범례 -->
@@ -946,7 +946,7 @@
       <div class="card-title" style="margin-bottom:4px;font-size:16px;">고객용 (스탬프 적립 화면)</div>
       <p style="font-size:12px;color:#78716c;margin-bottom:12px;">
         배포: <a href="https://rebot-app-customer-facing-page.vercel.app/" target="_blank" style="color:var(--green);">rebot-app-customer-facing-page.vercel.app</a>
-        <span style="margin-left:8px;padding:2px 8px;background:#fef2f2;color:#dc2626;border-radius:4px;font-size:11px;font-weight:600;">⚠ Vercel 배포 오류 수정 예정</span>
+        <span style="margin-left:8px;padding:2px 8px;background:#d1fae5;color:#065f46;border-radius:4px;font-size:11px;font-weight:600;">✓ 배포 정상</span>
       </p>
       <div style="background:white;border:1px solid #e7e5e4;border-radius:10px;overflow:hidden;">
         <table>
@@ -961,7 +961,7 @@
             <tr>
               <td>전화번호 입력 스탬프 적립</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>SMS 인증 없음, Express → Supabase <code>customers</code> / <code>visit_logs</code> 저장</td>
+              <td>SMS 인증 없음, Vercel API/로컬 Vite API → Supabase <code>customers</code> / <code>visit_logs</code> 저장</td>
             </tr>
             <tr>
               <td>localStorage 재방문 인식</td>
@@ -986,7 +986,7 @@
             <tr>
               <td>Supabase 사장님 대시보드 연동</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>고객이 적립 시 <code>customers</code>·<code>visit_logs</code> 테이블에 저장 → 사장님 대시보드 실시간 반영</td>
+              <td>고객이 적립 시 <code>store_code → store_id</code> 기준으로 저장 → 사장님 대시보드에서 매장별 조회</td>
             </tr>
             <tr style="background:#fef9c3;">
               <td><strong>당일 복수 스탬프 적립</strong></td>
@@ -1012,8 +1012,8 @@
     <div style="margin-bottom:32px;">
       <div class="card-title" style="margin-bottom:4px;font-size:16px;">사장님용 — 대시보드</div>
       <p style="font-size:12px;color:#78716c;margin-bottom:12px;">
-        배포: <a href="https://rebot-app-owner-dashboard.vercel.app/dashboard/demo" target="_blank" style="color:var(--blue);">rebot-app-owner-dashboard.vercel.app/dashboard/demo</a>
-        &nbsp;·&nbsp; Supabase 연동 완료
+        배포: <a href="https://rebot-app-owner-dashboard.vercel.app/dashboard/cafe-rebot" target="_blank" style="color:var(--blue);">rebot-app-owner-dashboard.vercel.app/dashboard/cafe-rebot</a>
+        &nbsp;·&nbsp; Supabase 연동 및 Vercel API 정상
       </p>
       <div style="background:white;border:1px solid #e7e5e4;border-radius:10px;overflow:hidden;">
         <table>
@@ -1028,7 +1028,7 @@
             <tr>
               <td>핵심 지표 요약 카드</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>전체 고객, 오늘 적립, 마케팅 동의, 이탈 위험, 최근 30일 재방문, 발송 대기 — <code>GET /api/dashboard</code></td>
+              <td>전체 고객, 오늘 적립, 마케팅 동의, 이탈 위험, 최근 30일 재방문, 발송 대기 — <code>GET /api/dashboard/:storeCode</code></td>
             </tr>
             <tr>
               <td>이탈 현황 4단계 표시</td>
@@ -1043,7 +1043,7 @@
             <tr>
               <td>최근 활동 피드</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>신규 고객 등록, 초안 생성, 발송 이력 최신 6건</td>
+              <td>신규 고객 등록, 초안 생성, 발송 이력 최신 6건 — Supabase 실제 데이터 기준</td>
             </tr>
             <tr>
               <td>사이드바 + 모바일 하단 탭</td>
@@ -1076,12 +1076,12 @@
             <tr>
               <td>고객 목록 + 이탈 단계 필터</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>전체 / 주의 / 위험 / 이탈 필터 — Supabase 실시간 조회</td>
+              <td>전체 / 주의 / 위험 / 이탈 필터 — <code>store_id</code> 기준 Supabase 매장별 조회</td>
             </tr>
             <tr>
               <td>전화번호 마스킹</td>
               <td><span class="tag tag-done">✓ 완료</span></td>
-              <td>010-****-5678 형태, DB 저장 시점에 <code>phone_masked</code> 컬럼 생성</td>
+              <td>010-****-5678 형태, DB 저장값 우선 사용 및 서버 유틸로 보정</td>
             </tr>
             <tr>
               <td>고객 상세 페이지</td>
@@ -1090,13 +1090,13 @@
             </tr>
             <tr>
               <td>이름·전화번호 검색</td>
-              <td><span class="tag tag-dev">개발중</span></td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
               <td>클라이언트 사이드 필터링</td>
             </tr>
             <tr>
               <td>마케팅 동의 필터 / 발송 버튼 비활성화</td>
-              <td><span class="tag tag-dev">개발중</span></td>
-              <td>미동의 고객 메시지 발송 차단 UI</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>미동의 고객 메시지 생성 버튼 비활성화 및 안내 문구 표시</td>
             </tr>
             <tr>
               <td>방문 횟수·최근 방문일 정렬</td>
@@ -1148,13 +1148,13 @@
             </tr>
             <tr>
               <td>메시지 편집 + 글자 수 표시</td>
-              <td><span class="tag tag-dev">개발중</span></td>
-              <td>inline 편집, 실시간 카운트</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>모달 편집 후 <code>PATCH /api/messages/:id</code>로 저장</td>
             </tr>
             <tr>
               <td>마케팅 미동의 발송 비활성화</td>
-              <td><span class="tag tag-dev">개발중</span></td>
-              <td>발송 버튼 disabled + 안내 문구</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>고객 상세에서 미동의 고객 메시지 생성 버튼 disabled + 안내 문구</td>
             </tr>
             <tr>
               <td>카카오 알림톡 실제 발송</td>
@@ -1206,13 +1206,13 @@
             </tr>
             <tr>
               <td>콘텐츠 입력 폼</td>
-              <td><span class="tag tag-dev">개발중</span></td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
               <td>홍보 목적, 이벤트 내용, 혜택, 기간, 말투, 강조 포인트 입력 UI</td>
             </tr>
             <tr>
               <td>QR 코드 생성·다운로드</td>
-              <td><span class="tag tag-dev">개발중</span></td>
-              <td>설정 페이지 <code>QRPreview</code> 컴포넌트, 이미지 저장 기능</td>
+              <td><span class="tag tag-done">✓ 완료</span></td>
+              <td>대시보드 QRPreview 컴포넌트로 고객용 스탬프 URL 제공</td>
             </tr>
             <tr>
               <td>매장 로고·브랜드 색상</td>
@@ -1273,25 +1273,25 @@
         <div class="stack-item">
           <div>
             <div class="stack-name">라우팅</div>
-            <div class="stack-desc">단일 페이지 SPA. <code>/:storeCode</code> URL 파라미터로 매장 구분. React Router 미사용.</div>
+            <div class="stack-desc">단일 페이지 SPA. <code>/stamp/:storeCode</code> 또는 QR 진입 URL의 storeCode로 매장 구분.</div>
           </div>
         </div>
         <div class="stack-item">
           <div>
-            <div class="stack-name">AI — Google Gemini SDK<span class="stack-version">@google/genai ^2.4</span></div>
-            <div class="stack-desc">서버(server.ts)에서만 호출. 고객 화면에서 AI 기능은 현재 없음 (서버 API 경유).</div>
+            <div class="stack-name">Backend — Vercel API / Vite middleware</div>
+            <div class="stack-desc"><code>api/index.ts</code>와 <code>src/lib/stamp-handlers.ts</code>가 동일한 스탬프 API 로직을 공유.</div>
           </div>
         </div>
         <div class="stack-item">
           <div>
             <div class="stack-name" style="display:flex;align-items:center;gap:8px;">Supabase (PostgreSQL) <span style="background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;">연동 완료 ✓</span></div>
-            <div class="stack-desc">@supabase/supabase-js. 고객 전화번호·스탬프·마케팅 동의 데이터 영구 저장. 테이블: customers, visit_logs.</div>
+            <div class="stack-desc">@supabase/supabase-js. 고객 전화번호·스탬프·마케팅 동의 데이터 영구 저장. 테이블: stores, customers, visit_logs.</div>
           </div>
         </div>
         <div class="stack-item">
           <div>
             <div class="stack-name">데이터 흐름</div>
-            <div class="stack-desc">고객 입력 → Express server.ts → Supabase DB 저장</div>
+            <div class="stack-desc">고객 QR 진입 → 전화번호 입력 → 서버 API → Supabase DB 저장 → 사장님 대시보드 조회</div>
           </div>
         </div>
         <div class="stack-item">
@@ -1303,7 +1303,7 @@
         <div class="stack-item">
           <div>
             <div class="stack-name">환경 변수</div>
-            <div class="stack-desc">SUPABASE_URL, SUPABASE_ANON_KEY (.env, .gitignore 처리)</div>
+            <div class="stack-desc">SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (.env, .gitignore 처리)</div>
           </div>
         </div>
       </div>
@@ -1319,13 +1319,13 @@
         <div class="stack-item">
           <div>
             <div class="stack-name">AI — OpenRouter API<span class="stack-version">OpenAI 호환</span></div>
-            <div class="stack-desc">서버(server.ts)에서만 호출. 모델: <code>google/gemini-flash-1.5-8b</code> (비용 효율 우선). AI 메시지·SNS 초안 생성에 사용.</div>
+            <div class="stack-desc">서버 API에서만 호출. 모델: <code>google/gemini-2.0-flash-lite</code>, 실패 시 Gemini SDK 및 템플릿 폴백.</div>
           </div>
         </div>
         <div class="stack-item">
           <div>
-            <div class="stack-name" style="display:flex;align-items:center;gap:8px;">Supabase (PostgreSQL) <span style="background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;">연동 예정</span></div>
-            <div class="stack-desc">현재 <code>src/db.json</code> 파일로 임시 운영 중. Supabase 연동 후 stores, customers, messages, content_drafts 테이블 사용 예정.</div>
+            <div class="stack-name" style="display:flex;align-items:center;gap:8px;">Supabase (PostgreSQL) <span style="background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;">연동 완료 ✓</span></div>
+            <div class="stack-desc">고객용 앱과 동일 프로젝트 공유. <code>store_code → stores.id</code> 변환 후 <code>store_id</code> 기준으로 customers, messages, content_drafts 조회.</div>
           </div>
         </div>
         <div class="stack-item">
@@ -1337,13 +1337,13 @@
         <div class="stack-item">
           <div>
             <div class="stack-name">lib 레이어</div>
-            <div class="stack-desc"><code>churn.ts</code> 이탈 감지, <code>prompts.ts</code> AI 프롬프트, <code>phone.ts</code> 마스킹, <code>mock.ts</code> 임시 데이터, <code>openrouter.ts</code> AI 클라이언트</div>
+            <div class="stack-desc"><code>db-server.ts</code> Supabase CRUD, <code>api-handlers.ts</code> REST 라우팅, <code>ai-server.ts</code> AI 생성, <code>churn.ts</code> 이탈 계산, <code>phone.ts</code> 마스킹</div>
           </div>
         </div>
         <div class="stack-item">
           <div>
             <div class="stack-name">환경 변수</div>
-            <div class="stack-desc">OPENROUTER_API_KEY, SUPABASE_URL, SUPABASE_ANON_KEY (.env, .gitignore 처리)</div>
+            <div class="stack-desc">SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENROUTER_API_KEY, GEMINI_API_KEY (.env, .gitignore 처리)</div>
           </div>
         </div>
       </div>
@@ -1353,9 +1353,9 @@
       <div class="notice-icon">⚠</div>
       <div>
         <strong>AI API 키 서버 전용 규칙</strong> —
-        OpenRouter API 키와 Supabase 서비스 키는 반드시 <code>server.ts</code> (Express 백엔드)에서만 사용합니다.
+        OpenRouter API 키와 Supabase 서비스 키는 반드시 서버 API(<code>server.ts</code>, <code>api/handler.js</code>)에서만 사용합니다.
         클라이언트(React 컴포넌트)에서 직접 호출하면 API 키가 브라우저에 노출됩니다.
-        클라이언트는 <code>fetch('/api/...')</code>로 Express 엔드포인트 경유.
+        클라이언트는 <code>fetch('/api/...')</code>로 서버 엔드포인트만 호출합니다.
       </div>
     </div>
   </div>
@@ -1379,15 +1379,18 @@
 ├── main.tsx
 ├── index.css
 ├── types.ts               <span class="comment"># Store, StampResult 인터페이스</span>
+├── lib/
+│   └── stamp-handlers.ts  <span class="comment"># Vercel·Vite 공유 API 핸들러</span>
 ├── components/
 │   ├── Header.tsx         <span class="comment"># 매장 로고·이름</span>
 │   ├── PhoneInput.tsx     <span class="comment"># 전화번호 입력 폼</span>
 │   ├── StampGrid.tsx      <span class="comment"># 스탬프 시각화</span>
 │   └── TermsConsent.tsx   <span class="comment"># 마케팅 동의</span>
 └── services/
-    └── stampService.ts    <span class="comment"># Express API 호출 레이어</span>
+    └── stampService.ts    <span class="comment"># /api 호출 레이어</span>
 
-server.ts                  <span class="comment"># Express 서버, Supabase 연동 ✓</span>
+api/index.ts               <span class="comment"># Vercel 서버리스 진입점</span>
+server.ts                  <span class="comment"># 로컬 Express 서버</span>
 vite.config.ts
 vercel.json
         </div>
@@ -1399,6 +1402,8 @@ vercel.json
 ├── App.tsx                <span class="comment"># React Router DOM 라우팅</span>
 ├── main.tsx
 ├── index.css
+├── serverless/
+│   └── handler.ts         <span class="comment"># Vercel API 번들 원본</span>
 ├── types/index.ts
 ├── components/
 │   ├── Sidebar.tsx        <span class="comment"># 데스크톱 사이드바</span>
@@ -1416,13 +1421,14 @@ vercel.json
     ├── prompts.ts         <span class="comment"># AI 프롬프트 빌더</span>
     ├── phone.ts           <span class="comment"># 마스킹 유틸</span>
     ├── openrouter.ts      <span class="comment"># OpenRouter 클라이언트</span>
-    ├── supabase.ts        <span class="comment"># Supabase 클라이언트 (연동 예정)</span>
-    ├── mock.ts            <span class="comment"># 임시 데이터 (Supabase 전환 전)</span>
+    ├── supabase.ts        <span class="comment"># Supabase 클라이언트</span>
+    ├── mock.ts            <span class="comment"># 목데이터 (현재 미사용)</span>
     ├── ai-server.ts       <span class="comment"># AI 서버 레이어</span>
-    ├── api-handlers.ts    <span class="comment"># Express 라우트 핸들러</span>
-    └── db-server.ts       <span class="comment"># DB 레이어 (→ Supabase 교체 예정)</span>
+    ├── api-handlers.ts    <span class="comment"># REST API 라우팅</span>
+    └── db-server.ts       <span class="comment"># Supabase CRUD</span>
 
-server.ts                  <span class="comment"># Express 서버 진입점</span>
+api/handler.js             <span class="comment"># esbuild로 생성된 Vercel 서버리스 번들</span>
+server.ts                  <span class="comment"># 로컬 Express 서버 진입점</span>
         </div>
       </div>
 
@@ -1431,7 +1437,7 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
         <div style="background:white;border:1px solid #e7e5e4;border-radius:10px;overflow:hidden;">
           <div style="padding:10px 16px;background:#1c3a2a;color:#6ee7b7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid #e7e5e4;">고객용 (스탬프) — customer-facing-page</div>
           <div class="route-item">
-            <span class="route-path">/<span style="color:var(--amber);">:storeCode</span></span>
+            <span class="route-path">/stamp/<span style="color:var(--amber);">:storeCode</span></span>
             <span class="route-desc">QR 스탬프 적립 페이지</span>
           </div>
           <div style="padding:10px 16px;background:#1e3a5f;color:#93c5fd;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;border-top:1px solid #e7e5e4;border-bottom:1px solid #e7e5e4;">사장님용 (대시보드) — owner-dashboard</div>
@@ -1466,7 +1472,7 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
           <div>
             라우팅 파라미터는 <strong>camelCase</strong> (<code>:storeCode</code>).
             React Router DOM v7 client-side 라우팅 사용.
-            현재 데모 URL: <code>/dashboard/demo</code>
+            현재 샘플 URL: <code>/dashboard/cafe-rebot</code>
           </div>
         </div>
       </div>
@@ -1526,7 +1532,6 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
           <tr><td><code>total_stamps</code></td><td>INTEGER NOT NULL DEFAULT 0</td><td>누적 스탬프 수</td></tr>
           <tr><td><code>total_visits</code></td><td>INTEGER NOT NULL DEFAULT 0</td><td>누적 방문 횟수</td></tr>
           <tr><td><code>last_visit_at</code></td><td>TIMESTAMPTZ</td><td>마지막 방문 시각 (이탈 감지 기준)</td></tr>
-          <tr><td><code>total_spend</code></td><td>INTEGER NOT NULL DEFAULT 0</td><td>누적 결제 금액 (원)</td></tr>
           <tr><td><code>created_at</code></td><td>TIMESTAMPTZ NOT NULL DEFAULT NOW()</td><td></td></tr>
           <tr style="background:#f5f5f4;"><td colspan="3" style="font-size:12px;"><code>UNIQUE(store_id, phone)</code> — 매장별 전화번호 중복 방지</td></tr>
         </tbody>
@@ -1547,10 +1552,7 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
           <tr><td><code>store_id</code></td><td>UUID NOT NULL → stores(id) CASCADE</td><td>매장별 집계 쿼리에 활용</td></tr>
           <tr><td><code>visited_at</code></td><td>TIMESTAMPTZ NOT NULL DEFAULT NOW()</td><td>방문 시각 (당일 중복 방지 기준)</td></tr>
           <tr><td><code>stamps_earned</code></td><td>INTEGER NOT NULL DEFAULT 1</td><td>이번 방문에서 적립된 스탬프 수</td></tr>
-          <tr><td><code>ordered_menus</code></td><td>TEXT[]</td><td>주문 메뉴 배열 (optional)</td></tr>
-          <tr><td><code>total_amount</code></td><td>INTEGER</td><td>결제 금액 (optional)</td></tr>
           <tr><td><code>source</code></td><td>TEXT NOT NULL DEFAULT 'kiosk'</td><td>'kiosk' | 'manual'</td></tr>
-          <tr><td><code>created_at</code></td><td>TIMESTAMPTZ NOT NULL DEFAULT NOW()</td><td></td></tr>
         </tbody>
       </table>
     </div>
@@ -1569,6 +1571,7 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
           <tr><td><code>customer_id</code></td><td>UUID NOT NULL → customers(id) CASCADE</td><td></td></tr>
           <tr><td><code>customer_name</code></td><td>TEXT</td><td>발송 시점 고객명 스냅샷 (nullable)</td></tr>
           <tr><td><code>phone_masked</code></td><td>TEXT NOT NULL DEFAULT ''</td><td>표시용 마스킹 번호</td></tr>
+          <tr><td><code>churn_stage</code></td><td>TEXT</td><td>초안 생성 시점 이탈 단계 스냅샷</td></tr>
           <tr><td><code>content</code></td><td>TEXT NOT NULL</td><td>메시지 본문</td></tr>
           <tr><td><code>status</code></td><td>TEXT NOT NULL DEFAULT 'draft'</td><td>'draft' | 'sent'</td></tr>
           <tr><td><code>sent_at</code></td><td>TIMESTAMPTZ</td><td>발송 처리 시각</td></tr>
@@ -1626,14 +1629,14 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
           <span class="api-method method-get">GET</span>
           <div>
             <div class="api-path">/api/store/[store_code]</div>
-            <div class="api-desc">매장 정보 조회</div>
+            <div class="api-desc">매장 정보 조회. 고객용·사장님용 모두 사용</div>
           </div>
         </div>
         <div class="api-item">
           <span class="api-method method-get">GET</span>
           <div>
             <div class="api-path">/api/dashboard/[store_code]</div>
-            <div class="api-desc">total_customers, marketing_consent_count, churn_summary</div>
+            <div class="api-desc">total_customers, marketing_consent_count, churn_summary, today_stamps, recent_activity</div>
           </div>
         </div>
         <div class="api-item">
@@ -1678,24 +1681,17 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
             <div class="api-desc">{action: 'send'} 또는 {content: string} — 상태 업데이트</div>
           </div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title" style="margin-bottom:16px;">MVP 추가 예정 (현재 mock 대체)</div>
-        <div class="api-item">
-          <span class="api-method method-get">GET</span>
-          <div>
-            <div class="api-path">/api/dashboard/[store_code] <span style="color:var(--amber);font-size:11px;">(확장)</span></div>
-            <div class="api-desc">today_stamps, recent_visitors_30d, pending_drafts, recent_activity 추가</div>
-          </div>
-        </div>
         <div class="api-item">
           <span class="api-method method-get">GET</span>
           <div>
             <div class="api-path">/api/messages/[store_code]</div>
-            <div class="api-desc">매장 전체 메시지 목록 (고객 정보 포함, 30일 재발송 여부)</div>
+            <div class="api-desc">매장 전체 메시지 목록</div>
           </div>
         </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">구현 완료 — 사장님 운영 API</div>
         <div class="api-item">
           <span class="api-method method-get">GET</span>
           <div>
@@ -1707,28 +1703,42 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
           <span class="api-method method-post">POST</span>
           <div>
             <div class="api-path">/api/content/[store_code]</div>
-            <div class="api-desc">SNS 콘텐츠 초안 임시 저장</div>
+            <div class="api-desc">SNS 콘텐츠 초안 저장</div>
           </div>
         </div>
         <div class="api-item">
           <span class="api-method method-get">GET</span>
           <div>
             <div class="api-path">/api/settings/[store_code]</div>
-            <div class="api-desc">매장 설정 조회 (브랜드 색상, 서명 포함)</div>
+            <div class="api-desc">매장 설정 조회</div>
           </div>
         </div>
         <div class="api-item">
           <span class="api-method method-patch">PATCH</span>
           <div>
             <div class="api-path">/api/settings/[store_code]</div>
-            <div class="api-desc">매장 설정 업데이트</div>
+            <div class="api-desc">매장명, 목표 스탬프, 리워드, 메시지 서명 수정</div>
+          </div>
+        </div>
+        <div class="api-item">
+          <span class="api-method method-post">POST</span>
+          <div>
+            <div class="api-path">/api/visit/[store_code]</div>
+            <div class="api-desc">사장님 수동 방문·스탬프 등록</div>
+          </div>
+        </div>
+        <div class="api-item">
+          <span class="api-method method-delete">DELETE</span>
+          <div>
+            <div class="api-path">/api/messages/[id]</div>
+            <div class="api-desc">메시지 초안 삭제</div>
           </div>
         </div>
         <div class="api-item">
           <span class="api-method method-get">GET</span>
           <div>
             <div class="api-path">/api/metrics/[store_code]</div>
-            <div class="api-desc"><span class="tag tag-phase2" style="font-size:11px;">Phase 2</span> 성과 지표 (재방문율, 전환율)</div>
+            <div class="api-desc">성과 지표. 현재 MVP 더미값, Phase 2에서 실제 계산 연결</div>
           </div>
         </div>
       </div>
@@ -1745,33 +1755,33 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
     <h2 class="section-title">이탈 감지 알고리즘</h2>
 
     <p class="section-desc">
-      <code>lib/churn.ts</code>의 <code>calcChurn(visitedDates: Date[])</code> 함수가 고객별 이탈 단계를 계산합니다.
-      방문 데이터를 서버(API Route)에서 수집한 뒤, 각 고객의 방문 이력을 기반으로 개인화된 임계값을 적용합니다.
+      <code>src/lib/churn.ts</code>의 <code>calcChurn([last_visit_at])</code> 함수가 고객별 이탈 단계를 계산합니다.
+      MVP에서는 DB에 <code>churn_stage</code>를 저장하지 않고, <code>customers.last_visit_at</code> 기준으로 서버에서 런타임 계산합니다.
     </p>
 
     <div class="grid-2" style="margin-bottom:24px;">
       <div class="card">
-        <div class="card-title" style="margin-bottom:16px;">방문 횟수별 판단 기준</div>
+        <div class="card-title" style="margin-bottom:16px;">MVP 판단 기준</div>
         <div class="algo-box">
           <div class="algo-row header">
-            <div class="algo-cell">방문 횟수</div>
+            <div class="algo-cell">입력</div>
             <div class="algo-cell">기준</div>
             <div class="algo-cell">비고</div>
           </div>
           <div class="algo-row">
-            <div class="algo-cell"><strong>0회</strong></div>
-            <div class="algo-cell">safe (경과 0일)</div>
-            <div class="algo-cell">방문 없음</div>
+            <div class="algo-cell"><strong>last_visit_at 없음</strong></div>
+            <div class="algo-cell">churned</div>
+            <div class="algo-cell">방문 기록 없음 또는 오래된 고객으로 처리</div>
           </div>
           <div class="algo-row">
-            <div class="algo-cell"><strong>1회</strong></div>
+            <div class="algo-cell"><strong>last_visit_at 있음</strong></div>
             <div class="algo-cell">고정 임계값 사용</div>
-            <div class="algo-cell">30 / 60 / 90일</div>
+            <div class="algo-cell">14 / 30 / 60일</div>
           </div>
           <div class="algo-row">
-            <div class="algo-cell"><strong>2회 이상</strong></div>
-            <div class="algo-cell">개인 평균 주기 기반</div>
-            <div class="algo-cell">×1.5 / ×2 / ×3</div>
+            <div class="algo-cell"><strong>messages</strong></div>
+            <div class="algo-cell">초안 생성 시점 스냅샷</div>
+            <div class="algo-cell"><code>churn_stage</code> 컬럼에 저장</div>
           </div>
         </div>
       </div>
@@ -1781,28 +1791,28 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
         <div class="algo-box">
           <div class="algo-row header">
             <div class="algo-cell">단계</div>
-            <div class="algo-cell">1회 방문 (고정)</div>
-            <div class="algo-cell">2회+ (개인 평균)</div>
+            <div class="algo-cell">조건</div>
+            <div class="algo-cell">의미</div>
           </div>
           <div class="algo-row">
             <div class="algo-cell"><span class="tag" style="background:var(--green-light);color:var(--green);">정상</span></div>
-            <div class="algo-cell">30일 미만</div>
-            <div class="algo-cell">avgInterval × 1.5 미만</div>
+            <div class="algo-cell">마지막 방문 ≤ 14일</div>
+            <div class="algo-cell">최근 방문 고객</div>
           </div>
           <div class="algo-row">
             <div class="algo-cell"><span class="tag" style="background:var(--yellow-light);color:var(--yellow);">주의</span></div>
-            <div class="algo-cell">30~59일</div>
-            <div class="algo-cell">× 1.5 이상</div>
+            <div class="algo-cell">15~30일</div>
+            <div class="algo-cell">재방문 유도 관찰 대상</div>
           </div>
           <div class="algo-row">
             <div class="algo-cell"><span class="tag" style="background:var(--orange-light);color:var(--orange);">위험</span></div>
-            <div class="algo-cell">60~89일</div>
-            <div class="algo-cell">× 2 이상</div>
+            <div class="algo-cell">31~60일</div>
+            <div class="algo-cell">복귀 메시지 우선 대상</div>
           </div>
           <div class="algo-row">
             <div class="algo-cell"><span class="tag" style="background:var(--red-light);color:var(--red);">이탈</span></div>
-            <div class="algo-cell">90일 이상</div>
-            <div class="algo-cell">× 3 이상</div>
+            <div class="algo-cell">60일 초과</div>
+            <div class="algo-cell">장기 미방문 고객</div>
           </div>
         </div>
       </div>
@@ -1810,38 +1820,29 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
 
     <div class="code-block">
 <span class="comment">// lib/churn.ts — 실제 구현 코드</span>
-<span class="keyword">export function</span> <span class="fn">calcChurn</span>(visitedDates: <span class="type">Date</span>[]): <span class="type">ChurnResult</span> {
-  <span class="keyword">if</span> (visitedDates.length === 0)
-    <span class="keyword">return</span> { churnStage: <span class="string">"safe"</span>, daysSinceVisit: 0, avgInterval: <span class="keyword">null</span> };
+<span class="keyword">export function</span> <span class="fn">calcChurn</span>(dates: <span class="type">string</span>[]): <span class="type">ChurnStage</span> {
+  <span class="keyword">if</span> (!dates || dates.length === 0) <span class="keyword">return</span> <span class="string">"churned"</span>;
 
-  <span class="keyword">const</span> sorted = [...visitedDates].sort((a, b) => b.getTime() - a.getTime());
-  <span class="keyword">const</span> daysSinceVisit = Math.floor((Date.now() - sorted[0].getTime()) / 86400000);
-
-  <span class="keyword">if</span> (sorted.length === 1)
-    <span class="keyword">return</span> { churnStage: <span class="fn">fixedChurnStage</span>(daysSinceVisit), daysSinceVisit, avgInterval: <span class="keyword">null</span> };
-
-  <span class="comment">// 방문 간격 평균 계산 (2회 이상)</span>
-  <span class="keyword">const</span> intervals = sorted.slice(0, -1).map((d, i) =>
-    Math.floor((d.getTime() - sorted[i + 1].getTime()) / 86400000)
+  <span class="keyword">const</span> sorted = [...dates].sort((a, b) =>
+    <span class="keyword">new</span> Date(b).getTime() - <span class="keyword">new</span> Date(a).getTime()
   );
-  <span class="keyword">const</span> avgInterval = Math.round(intervals.reduce((a, b) => a + b, 0) / intervals.length);
+  <span class="keyword">const</span> diffDays = Math.ceil(
+    Math.abs(Date.now() - <span class="keyword">new</span> Date(sorted[0]).getTime()) / 86400000
+  );
 
-  <span class="keyword">let</span> churnStage: <span class="type">ChurnStage</span> = <span class="string">"safe"</span>;
-  <span class="keyword">if</span> (daysSinceVisit >= avgInterval * 3) churnStage = <span class="string">"churned"</span>;
-  <span class="keyword">else if</span> (daysSinceVisit >= avgInterval * 2) churnStage = <span class="string">"danger"</span>;
-  <span class="keyword">else if</span> (daysSinceVisit >= avgInterval * 1.5) churnStage = <span class="string">"watch"</span>;
-
-  <span class="keyword">return</span> { churnStage, daysSinceVisit, avgInterval };
+  <span class="keyword">if</span> (diffDays &lt;= 14) <span class="keyword">return</span> <span class="string">"safe"</span>;
+  <span class="keyword">if</span> (diffDays &lt;= 30) <span class="keyword">return</span> <span class="string">"watch"</span>;
+  <span class="keyword">if</span> (diffDays &lt;= 60) <span class="keyword">return</span> <span class="string">"danger"</span>;
+  <span class="keyword">return</span> <span class="string">"churned"</span>;
 }
     </div>
 
     <div class="notice notice-amber" style="margin-top:20px;">
       <div class="notice-icon">💡</div>
       <div>
-        <strong>개인화 이탈 감지의 장점</strong> —
-        주 1회 방문하는 고객과 월 1회 방문하는 고객에게 동일한 기준을 적용하면 오탐이 발생합니다.
-        개인 평균 방문 주기 기반으로 이탈 임계값을 적용하므로, 방문 패턴이 다른 고객을 더 정확하게 분류합니다.
-        단, 방문이 1회뿐인 신규 고객은 데이터가 부족하므로 고정 임계값(30/60/90일)을 사용합니다.
+        <strong>MVP 기준</strong> —
+        현재는 단순하고 설명 가능한 고정 임계값으로 이탈 단계를 계산합니다.
+        개인 평균 방문 주기 기반 임계값은 방문 데이터가 충분히 쌓인 뒤 Phase 2에서 고도화합니다.
       </div>
     </div>
   </div>
@@ -1872,14 +1873,13 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
         <div class="card-title" style="margin-bottom:16px;">프롬프트에 전달되는 컨텍스트</div>
         <div class="code-block" style="font-size:12px;">
 {
-  storeName: <span class="string">"카페 리봇"</span>,
-  ownerName: <span class="string">"김대표"</span>,
-  customerName: <span class="string">"홍길동"</span>,     <span class="comment">// null 가능</span>
-  daysSinceVisit: <span class="keyword">45</span>,
-  visitCount: <span class="keyword">7</span>,
-  avgInterval: <span class="keyword">12</span>             <span class="comment">// null 가능 (1회 방문)</span>
+  storeName: <span class="string">"리봇 카페 &amp; 베이커리"</span>,
+  customerName: <span class="string">"홍길동"</span>,        <span class="comment">// null이면 "고객"</span>
+  churnStage: <span class="string">"danger"</span>,
+  rewardDesc: <span class="string">"아메리카노 1잔 무료 쿠폰"</span>,
+  messageSignature: <span class="string">"리봇 카페 드림"</span>
 }
-<span class="comment">// 응답: { "content": "메시지 본문..." }</span>
+<span class="comment">// 응답: 메시지 본문 string → messages.content 저장</span>
         </div>
       </div>
     </div>
@@ -1897,40 +1897,31 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
     <div class="grid-2">
       <div class="card">
         <div class="card-title" style="margin-bottom:16px;">완료</div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">Supabase 프로젝트 생성 + 테이블 4개 (stores, customers, visit_logs, messages)</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">환경 변수 설정 (.env.local) + .gitignore</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">lib/supabase.ts, openrouter.ts, churn.ts, prompts.ts, phone.ts</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">POST /api/stamp — 스탬프 적립 API</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">GET /api/dashboard — 이탈 현황 집계</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">GET /api/customers — 고객 목록 + 이탈 단계 계산</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">GET /api/customers/[id] — 고객 상세 + stats</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">POST /api/generate-message — OpenRouter AI 메시지 생성</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">POST /api/generate-post — SNS 콘텐츠 초안 생성</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">PATCH /api/messages/[id] — 메시지 발송 처리</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">/stamp/[store_code] — 고객 스탬프 적립 페이지 (localStorage 재방문 인식)</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">/dashboard, /customers, /customers/[id] — 사장님 페이지 기본 구현</span></div>
-        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">원본 디자인 시스템 적용 (amber, shadcn/ui, 이탈 배지)</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">Supabase 프로젝트 연결 + stores, customers, visit_logs, messages, content_drafts 테이블 사용</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">고객용 QR 스탬프 적립 페이지 배포 정상</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">고객 전화번호 입력, localStorage 재방문 인식, 약관·마케팅 동의 수집</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">POST /api/stamp — store_code 기준 스탬프 적립 및 visit_logs 저장</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">사장님 대시보드 Vercel 배포 정상, /dashboard/cafe-rebot 기준 데이터 표시</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">GET /api/dashboard/:storeCode — Supabase 실제 데이터 기반 요약 카드·최근 활동</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">GET /api/customers/:storeCode — 고객 목록 + 이탈 단계 + store_id 매장별 필터</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">GET /api/customers/:storeCode/:id — 고객 상세, 방문 이력, 메시지 이력</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">POST /api/generate-message — OpenRouter → Gemini → 템플릿 폴백 AI 메시지 생성</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">POST /api/generate-post + GET/POST /api/content — SNS 콘텐츠 초안 생성·저장</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">GET/PATCH /api/settings — 매장 설정 조회·수정</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">Vercel 서버리스 모듈 누락 해결: src/serverless/handler.ts → esbuild → api/handler.js 번들</span></div>
+        <div class="check-item check-done"><span class="check-icon">✅</span><span class="check-label">더미 대시보드 수치 제거, Supabase 실제 데이터 기준 표시</span></div>
       </div>
 
       <div class="card">
-        <div class="card-title" style="margin-bottom:16px;">MVP 잔여 작업</div>
-        <div class="check-item check-todo"><span class="check-icon">🔲</span><span class="check-label">app/(owner)/layout.tsx — 사이드바 + 모바일 하단탭 공통 레이아웃</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔲</span><span class="check-label">대시보드 확장 — 오늘 적립, 최근 30일 재방문, 최근 활동 피드, 성과 지표</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔲</span><span class="check-label">/messages/[store_code] — AI 메시지 목록·생성·발송 통합 페이지</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔲</span><span class="check-label">/content/[store_code] — SNS 콘텐츠 입력폼·채널별 초안·임시저장</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔲</span><span class="check-label">/settings/[store_code] — 매장 설정·QR 미리보기·다운로드</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔲</span><span class="check-label">lib/mock.ts — 미구현 API 임시 대체 함수</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔲</span><span class="check-label">stores 테이블 컬럼 추가 (brand_color, message_signature)</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔲</span><span class="check-label">고객 목록 검색·정렬 기능</span></div>
-        <div class="divider"></div>
-        <div class="card-title" style="margin-bottom:16px;color:#2563eb;">Phase 2 계획</div>
-        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">Vercel 프로덕션 배포</span></div>
+        <div class="card-title" style="margin-bottom:16px;">Phase 2 계획</div>
+        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">성과 지표 실제 데이터 계산 API (현재 MVP 더미값)</span></div>
+        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">고객 당일 복수 스탬프 적립 정책 (여러 잔 주문·당일 재방문)</span></div>
         <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">Supabase RLS (Row Level Security) 설정</span></div>
         <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">사장님 로그인 (Supabase Auth + 매장 소유권 검증)</span></div>
         <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">Solapi 카카오 알림톡 실제 발송 연동</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">QR 코드 이미지 생성 라이브러리 연결</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">SNS 콘텐츠 초안 DB 저장 (content_drafts 테이블)</span></div>
-        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">성과 지표 실제 데이터 계산 API</span></div>
+        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">QR 코드 이미지 다운로드, 매장 로고·브랜드 색상 업로드</span></div>
+        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">고객 전용 마이페이지, 스탬프 이력 조회, 리워드 쿠폰 관리</span></div>
+        <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">SNS 직접 게시 API 연동</span></div>
         <div class="check-item check-todo"><span class="check-icon">🔵</span><span class="check-label">다중 매장 관리</span></div>
       </div>
     </div>
@@ -1951,8 +1942,8 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
         <ul style="font-size:14px;color:#57534e;padding-left:18px;line-height:2.2;">
           <li>전화번호는 DB에 정규화(숫자만 저장), 화면에는 마스킹 표시</li>
           <li>OpenRouter API Key: 서버(API Route)에서만 사용, 클라이언트 노출 없음</li>
-          <li>Supabase Anon Key: 클라이언트용이나 모든 조회는 서버 경유</li>
-          <li>.env.local은 .gitignore에 포함, 레포에 업로드 금지</li>
+          <li>Supabase service_role key: 서버 API에서만 사용, 클라이언트 노출 없음</li>
+          <li>.env는 .gitignore에 포함, 레포에 업로드 금지</li>
           <li>마케팅 미동의 고객 메시지 발송 차단 (UI + API)</li>
         </ul>
       </div>
@@ -1983,7 +1974,7 @@ server.ts                  <span class="comment"># Express 서버 진입점</spa
 <!-- 푸터 -->
 <!-- ────────────────────────────────────────────────────── -->
 <div class="doc-footer">
-  <strong>리봇(Rebot)</strong> — 서비스 기획서 v3 &nbsp;·&nbsp; 작성일 2026-06-29 &nbsp;·&nbsp; 작성자: 이나영 &nbsp;·&nbsp; 문의: kjin618@gmail.com<br>
+  <strong>리봇(Rebot)</strong> — 서비스 기획서 v3.1 &nbsp;·&nbsp; 업데이트 2026-06-30 &nbsp;·&nbsp; 작성자: 이나영 &nbsp;·&nbsp; 문의: kjin618@gmail.com<br>
   <span style="font-size:12px;margin-top:6px;display:block;">이 문서는 멘토 공유 목적으로 작성되었습니다. 코드베이스는 GitHub rebot-app 레포지토리를 참조하세요.</span>
 </div>
 
